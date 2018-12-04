@@ -19,6 +19,7 @@ class TestDefect(unittest.TestCase):
 
         # Create a defect
         defect = Defect(self.image, *transform_operations)
+        defect.distort_defect()
 
         if not np.array_equal(defect.original_defect_image, defect.distorted_defect_image):
                 raise AssertionError("Elements don't match!")

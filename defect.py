@@ -16,7 +16,7 @@ class Defect:
 
 
         self.original_defect_image = original_defect_image  # original image of defect
-
+        a = self.original_defect_image.shape
         self.distorted_defect_image = []
         self.distorted_defect_images = []
 
@@ -28,11 +28,16 @@ class Defect:
 
         self.undistorted_height = self.original_defect_image.shape[0]
         self.undistorted_width = self.original_defect_image.shape[1]
+        b = 1
 
     def distort_defect(self):
+        self.original_defect_images = []
+        self.original_defect_images.append(self.original_defect_image)
+        c = 1
+
         # apply the pipeline to the defect to distort it
         distorted_defect_images = tubo.pipeline(
-            self.original_defect_image,
+            self.original_defect_images,
             *self.transform_operations)
 
         # recalculate 'box' of defect
