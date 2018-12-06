@@ -14,9 +14,8 @@ class Defect:
     # Initializer / Instance Attributes
     def __init__(self, original_defect_image: dict(type=numpy.ndarray, help='original image of defect'), *transform_operations: dict(type=list, help='list of transform operator function names to use in pipeline')):
 
-
         self.original_defect_image = original_defect_image  # original image of defect
-        a = self.original_defect_image.shape
+        self.original_defect_images = []
         self.distorted_defect_image = []
         self.distorted_defect_images = []
 
@@ -28,12 +27,9 @@ class Defect:
 
         self.undistorted_height = self.original_defect_image.shape[0]
         self.undistorted_width = self.original_defect_image.shape[1]
-        b = 1
 
     def distort_defect(self):
-        self.original_defect_images = []
         self.original_defect_images.append(self.original_defect_image)
-        c = 1
 
         # apply the pipeline to the defect to distort it
         distorted_defect_images = tubo.pipeline(
