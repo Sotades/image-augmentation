@@ -49,21 +49,30 @@ class Bottle(object):
 
         np.copyto(self.bottle_image_with_boxes, self.bottle_image)
         # Draw rectangles
+        box_number = 0
         for down_index in range(0, boxes_down):
             for across_index in range(0, boxes_across):
-
+                # Box Coordinates
                 ul_px = across_index * self.box_width_px
                 lr_px = ul_px + self.box_width_px
                 ul_py = down_index * self.box_height_px
                 lr_py = ul_py + self.box_height_px
+                box_number = box_number + 1
 
+                # Text coordinates
+                ll_px = ul_px + 2
+                ll_py = ul_py + self.box_height_px - 2
+
+                # Draw rectangle
                 cv2.rectangle(self.bottle_image_with_boxes, (ul_px, ul_py), (lr_px, lr_py), color=(0, 255, 0), thickness=1)
+
+                # Draw box number in rectangle
+                cv2.putText(self.bottle_image_with_boxes, str(box_number), (ll_px, ll_py), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 255, 0))
 
         cv2.imshow('image', self.bottle_image_with_boxes)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
-        cv2.imwrite('images/unit_test/bottle_with_boxes.jpg', self.bottle_image_with_boxes)
-
+        cv2.imwrite('bottle_with_boxes.jpg', self.bottle_image_with_boxes)
 
 
 
