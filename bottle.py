@@ -49,15 +49,20 @@ class Bottle(object):
 
         np.copyto(self.bottle_image_with_boxes, self.bottle_image)
         # Draw rectangles
-        # TODO implement rectangles iteration
-        for down_index in range(1, boxes_down):
-            for across_index in range(boxes_across):
+        for down_index in range(0, boxes_down):
+            for across_index in range(0, boxes_across):
 
-                cv2.rectangle(self.bottle_image_with_boxes, (0, 0), (64, 64), color=(0, 255, 0), thickness=1)
+                ul_px = across_index * self.box_width_px
+                lr_px = ul_px + self.box_width_px
+                ul_py = down_index * self.box_height_px
+                lr_py = ul_py + self.box_height_px
+
+                cv2.rectangle(self.bottle_image_with_boxes, (ul_px, ul_py), (lr_px, lr_py), color=(0, 255, 0), thickness=1)
 
         cv2.imshow('image', self.bottle_image_with_boxes)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
+        cv2.imwrite('images/unit_test/bottle_with_boxes.jpg', self.bottle_image_with_boxes)
 
 
 

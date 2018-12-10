@@ -27,6 +27,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_draw_and_display_rectangles(self):
         self.bottle = Bottle('images/unit_test/bottle.jpg')
+        boxes = self.bottle.calculate_box_dimensions(desired_boxes_across=4, desired_boxes_down=10)
         self.bottle.draw_and_display_rectangles(boxes_across=4, boxes_down=10)
         return
 
